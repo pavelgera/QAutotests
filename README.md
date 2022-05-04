@@ -12,7 +12,7 @@ specific file:
 
 for example:
 
-`npx wdio wdio.conf.js --spec specs/1_login.js`
+`npx wdio wdio.conf.js --spec specs/3_login.js`
 
 ### Generate allure
 `npm run report`
