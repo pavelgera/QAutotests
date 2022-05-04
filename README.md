@@ -24,4 +24,4 @@ for example:
 `npm run repl`
 
 ### SITE
-[https://anatoly-karpovich.github.io/HiqoMeetup/)
+[https://anatoly-karpovich.github.io/HiqoMeetup/]
