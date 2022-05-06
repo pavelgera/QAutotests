@@ -7,7 +7,7 @@ describe("Example of mocha tests", () => {
     { username: "", password: "", message: "Please, provide valid data" },
     { username: "", password: "123abcA!", message: "Username is required" },
     { username: "Hiqo", password: "", message: "Password is required" },
-    { username: "Hi", password: "123abcA!", message: "Username can't contain at least 3 characters" },
+    { username: "Hi", password: "123abcA!", message: "Username should contain at least 3 characters" },
     { username: " Hiqo", password: "123abcA!", message: "Prefix and postfix spaces are not allowed is username" },
     { username: "Hiqo ", password: "123abcA!", message: "Prefix and postfix spaces are not allowed is username" },
     { username: "Hiqo", password: "123abcA", message: "Password should contain at least 8 characters" },

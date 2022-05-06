@@ -36,7 +36,7 @@ describe('Example of mocha tests', () => {
         await $('#register').click()
         let errorMessage = await $('#errorMessageOnRegister')
         await errorMessage.waitForDisplayed({timeout: 3000})
-        await expect(await errorMessage.getText()).toEqual("Username can't contain at least 3 characters")
+        await expect(await errorMessage.getText()).toEqual("Username should contain at least 3 characters")
     })
     it('Should not allow to create user with more than 40 characters is username', async function() {
         await browser.execute(async function() {
