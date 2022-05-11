@@ -1,4 +1,5 @@
 .idea
+./allure-results/
 debug.js
 node_modules
 allure-report
