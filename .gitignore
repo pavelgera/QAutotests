@@ -1,5 +1,10 @@
 .idea
-allure-results
+# exclude everything
+allure-results/*
+screenshots/*
+# exception to the rule
+!allure-results/.gitkeep
+!screenshots/.gitkeep 
 debug.js
 node_modules
 allure-report

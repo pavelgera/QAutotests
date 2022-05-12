@@ -132,7 +132,18 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: [
+        "spec",
+        [
+          "allure",
+          {
+            outputDir: "allure-results",
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
+            useCucumberStepReporter: false,
+          },
+        ],
+      ],
 
 
     
@@ -141,7 +152,8 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
+        retries: 0
     },
     //
     // =====
@@ -159,15 +171,29 @@ exports.config = {
     onPrepare: function (config, capabilities) {
         const fs = require("fs");
         const path = require("path");
-        const directoryAllure = "./allure-results"; 
+        const directory = "screenshots";
+        const directoryAllure = "./allure-results";
+    
+        fs.readdir(directory, (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+              if(file != '.gitkeep') {
+            fs.unlink(path.join(directory, file), (err) => {
+              if (err) throw err;
+            });
+                }
+          }
+        });
     
         fs.readdir(directoryAllure, (err, files) => {
           if (err) throw err;
     
           for (const file of files) {
+            if(file != '.gitkeep') {
             fs.unlink(path.join(directoryAllure, file), (err) => {
               if (err) throw err;
             });
+                }
           }
         });
     },
@@ -252,8 +278,9 @@ exports.config = {
      */
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
-            await browser.takeScreenshot();
-        }
+            const dateString = new Date().toLocaleString().replace(/[^0-9]+/g, "_");
+            await browser.saveScreenshot(`./screenshots/failed_test_${dateString}.png`);
+          }
     },
 
 

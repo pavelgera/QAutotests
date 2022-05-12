@@ -1,6 +1,7 @@
 ### Install
 `npm install`
 
+
 ### Run tests
 all tests:
 
@@ -12,6 +13,8 @@ specific file:
 
 for example:
 
+`npx wdio wdio.conf.js --spec specs/1_registration.js`
+`npx wdio wdio.conf.js --spec specs/2_registration_ddd.js`
 `npx wdio wdio.conf.js --spec specs/3_login.js`
 
 ### Generate allure
