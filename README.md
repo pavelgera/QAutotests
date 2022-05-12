@@ -1,7 +1,5 @@
-### 1. Install
+### Install
 `npm install`
-
-### 2. Create folder `allure-results` in root folder
 
 
 ### Run tests
