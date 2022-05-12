@@ -171,15 +171,29 @@ exports.config = {
     onPrepare: function (config, capabilities) {
         const fs = require("fs");
         const path = require("path");
-        const directoryAllure = "./allure-results"; 
+        const directory = "screenshots";
+        const directoryAllure = "./allure-results";
+    
+        fs.readdir(directory, (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+              if(file != '.gitkeep') {
+            fs.unlink(path.join(directory, file), (err) => {
+              if (err) throw err;
+            });
+                }
+          }
+        });
     
         fs.readdir(directoryAllure, (err, files) => {
           if (err) throw err;
     
           for (const file of files) {
+            if(file != '.gitkeep') {
             fs.unlink(path.join(directoryAllure, file), (err) => {
               if (err) throw err;
             });
+                }
           }
         });
     },
@@ -264,8 +278,9 @@ exports.config = {
      */
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
-            await browser.takeScreenshot();
-        }
+            const dateString = new Date().toLocaleString().replace(/[^0-9]+/g, "_");
+            await browser.saveScreenshot(`./screenshots/failed_test_${dateString}.png`);
+          }
     },
 
 
